@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using Library.Domain.DTOs;
+using Library.Domain.DTOs.Book;
+using Library.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +13,8 @@ namespace Library.Service.Configurations.Mappings {
 
         public EntitiesToDtoMappingProfile() {
 
-
+            CreateMap(typeof(GenericResponse<>), typeof(GenericResponse<>));
+            CreateMap<Book, BookResponseDto>().ReverseMap();
 
         }
     }

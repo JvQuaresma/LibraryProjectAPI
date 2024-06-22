@@ -17,9 +17,7 @@ namespace Library.Domain.Models {
 
         [JsonProperty("name")]
         public string Name { get; set; }
-
-        [JsonProperty("nationality")]
-        public string Nationality { get; set; }
+   
 
     }
 }

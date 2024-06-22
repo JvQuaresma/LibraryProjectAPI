@@ -5,8 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddSql(builder.Configuration);
-                
+builder.Services.AddSql(builder.Configuration)
+                .AddRepository()
+                .AddService();                
 
 builder.Services.AddAutoMapper(typeof(EntitiesToDtoMappingProfile));
 
