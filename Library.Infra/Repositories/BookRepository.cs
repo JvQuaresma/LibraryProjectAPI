@@ -54,15 +54,13 @@ namespace Library.Infra.Repositories {
 
         }
 
-        public async Task<Book> UpdateAsync(BookUpdateDto bookUpdateDto, int id) {
+        public async Task<Book> UpdateAsync(Book book, int id) {
 
             try {
                 var existingBook = await _context.Books.FindAsync(id);
 
                 if (existingBook == null)
                     throw new Exception("Book não encontrado.");
-
-                _mapper.Map(bookUpdateDto, existingBook);
 
                 await _context.SaveChangesAsync();
                 return existingBook;

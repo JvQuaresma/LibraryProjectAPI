@@ -46,7 +46,7 @@ namespace Library.Service.Services {
         public async Task<BookResponseDto> UpdateBook(BookUpdateDto bookUpdateDto, int id) {
 
             var book = _mapper.Map<Book>(bookUpdateDto);
-            var existingBook = await _bookRepository.UpdateAsync(bookUpdateDto, id);
+            var existingBook = await _bookRepository.UpdateAsync(book, id);
 
             return _mapper.Map<BookResponseDto>(existingBook);
 

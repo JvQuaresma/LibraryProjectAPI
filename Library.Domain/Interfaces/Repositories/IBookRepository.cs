@@ -12,7 +12,7 @@ namespace Library.Domain.Interfaces.Repositories {
         public Task<Book> ToAddAsync(Book book);
         public Task<Book> GetByIdAsync(int id);
         public Task<IEnumerable<Book>> GetAllAsync();
-        public Task<Book> UpdateAsync(BookUpdateDto bookUpdateDto, int id);
+        public Task<Book> UpdateAsync(Book book, int id);
         public Task<Book> DeleteAsync(int id);
 
     }
