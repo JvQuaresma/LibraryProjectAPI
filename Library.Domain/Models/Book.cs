@@ -11,17 +11,10 @@ namespace Library.Domain.Models {
     public class Book {
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [JsonProperty("id")]       
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }     
-
-        [JsonProperty("type")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]              
+        public int Id { get; set; }       
+        public string Name { get; set; }           
         public string Type { get; set; }
-
-        [JsonProperty("available")]
         public bool Available { get; set; }
 
     }

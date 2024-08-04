@@ -8,11 +8,15 @@ namespace Library.Api.Extensions {
 
         public static IServiceCollection AddService(this IServiceCollection services) {
 
-            services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IBookExternalRequestService, BookExternalRequestService>();
+            services.AddScoped<IBookService, BookService>();          
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<ILoanService, LoanService>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IBookApi, BookApiRest>();
+
+            services.AddScoped<IBookExternalApi, BookApiRest>();
+
+            
 
             return services;
 

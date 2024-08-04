@@ -8,6 +8,7 @@ namespace Library.Domain.DTOs.User {
     public class UserResponseDto {
 
         public string? Name {  get; set; }
+        public List<Library.Domain.Models.Loan> Loans { get; set; }
 
     }
 }

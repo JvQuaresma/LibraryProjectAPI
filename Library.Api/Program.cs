@@ -1,5 +1,7 @@
 using Library.Api.Extensions;
+using Library.Domain.Interfaces;
 using Library.Service.Configurations.Mappings;
+using Library.Service.Rest;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSql(builder.Configuration)
                 .AddRepository()
-                .AddService();                
+                .AddService();
+
+builder.Services.AddHttpClient<BookApiRest>();
+    
 
 builder.Services.AddAutoMapper(typeof(EntitiesToDtoMappingProfile));
 

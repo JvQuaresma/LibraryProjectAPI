@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace Library.Domain.DTOs.Author {
-    public class AuthorResponseDto {
+namespace Library.Domain.DTOs.Book {
+    public class BookNameDto {
 
         public string? Name { get; set; }
-        public List<Library.Domain.Models.Book>? Books { get; set; }
 
     }
 }

@@ -15,6 +15,9 @@ namespace Library.Service.Configurations.Mappings {
 
             CreateMap(typeof(GenericResponse<>), typeof(GenericResponse<>));
             CreateMap<Book, BookResponseDto>().ReverseMap();
+            CreateMap<BookUpdateDto, Book>();
+            CreateMap<BookExternalByIdDto, BookResponseDto>().ReverseMap();
+
 
         }
     }

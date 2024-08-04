@@ -1,64 +1,77 @@
 ﻿using Library.Domain.DTOs;
+using Library.Domain.DTOs.Book;
 using Library.Domain.Interfaces;
 using Library.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Library.Service.Rest {
-    public class BookApiRest : IBookApi {
-        public async Task<GenericResponse<List<Book>>> GetAllBooks() {
+    public class BookApiRest : IBookExternalApi {
+        
+        public async Task<GenericResponse<IEnumerable<Book>>> GetAllBooksAsync(HttpClient client) {
+            var response = new GenericResponse<IEnumerable<Book>>();
 
-            var request = new HttpRequestMessage(HttpMethod.Get, "https://simple-books-api.glitch.me/books");
-
-            var response = new GenericResponse<List<Book>>();
-            using (var client = new HttpClient()) {
-                var responseBookApi = await client.SendAsync(request);
+            try {
+                var responseBookApi = await client.GetAsync("https://simple-books-api.glitch.me/books");
                 var contentResp = await responseBookApi.Content.ReadAsStringAsync();
-                var objResponse = JsonSerializer.Deserialize<List<Book>>(contentResp);
 
                 if (responseBookApi.IsSuccessStatusCode) {
+                    var objResponse = JsonSerializer.Deserialize<IEnumerable<Book>>(contentResp, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-                    response.httpCode = responseBookApi.StatusCode;
-                    response.returnData = objResponse;
-
+                    if (objResponse != null) {
+                        response.httpCode = responseBookApi.StatusCode;
+                        response.returnData = objResponse;
+                    } else {
+                        response.httpCode = HttpStatusCode.InternalServerError;
+                       
+                    }
                 } else {
                     response.httpCode = responseBookApi.StatusCode;
-                    response.returnError = JsonSerializer.Deserialize<ExpandoObject>(contentResp);
+                    response.returnError = JsonSerializer.Deserialize<ExpandoObject>(contentResp, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                 }
-
+            } catch (Exception ex) {
+                response.httpCode = HttpStatusCode.InternalServerError;
+               
             }
 
             return response;
         }
 
-        public async Task<GenericResponse<Book>> GetBookById(int id) {
+        public async Task<GenericResponse<BookExternalByIdDto>> GetBookById(int id, HttpClient client) {
+            var response = new GenericResponse<BookExternalByIdDto>();
 
-            var request = new HttpRequestMessage(HttpMethod.Get, $"https://simple-books-api.glitch.me/books/{id}");
-
-            var response = new GenericResponse<Book>();
-            using (var client = new HttpClient()) {
-                var responseBookApi = await client.SendAsync(request);
+            try {
+                
+                var responseBookApi = await client.GetAsync($"https://simple-books-api.glitch.me/books/{id}");
                 var contentResp = await responseBookApi.Content.ReadAsStringAsync();
-                var objResponse = JsonSerializer.Deserialize<Book>(contentResp);
 
                 if (responseBookApi.IsSuccessStatusCode) {
+                    var objResponse = JsonSerializer.Deserialize<BookExternalByIdDto>(contentResp, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
+                    if (objResponse != null) {
+                        response.httpCode = responseBookApi.StatusCode;
+                        response.returnData = objResponse;
+                    } else {
+                        response.httpCode = HttpStatusCode.InternalServerError;
+                       
+                    }
+                } else {
                     response.httpCode = responseBookApi.StatusCode;
-                    response.returnData = objResponse;
-
-                }else {
-                    response.httpCode = responseBookApi.StatusCode;
-                    response.returnError = JsonSerializer.Deserialize<ExpandoObject>(contentResp);
+                    response.returnError = JsonSerializer.Deserialize<ExpandoObject>(contentResp, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                 }
-
+            } catch (Exception ex) {
+                response.httpCode = HttpStatusCode.InternalServerError;
+                
             }
 
             return response;
         }
+        
     }
 }

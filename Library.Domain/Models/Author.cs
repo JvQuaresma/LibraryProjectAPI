@@ -11,12 +11,10 @@ namespace Library.Domain.Models {
     public class Author {
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]      
+        public int Id { get; set; }       
         public string Name { get; set; }
+ 
    
 
     }

@@ -12,26 +12,13 @@ namespace Library.Domain.Models {
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [JsonProperty("id")]
         public int Id { get; set; }
-
-        [JsonProperty("bookId")]
         public int BookId { get; set; }
-
-        public Book Book { get; set; }
-
-        [JsonProperty("userId")]
+        public Book Book { get; set; }       
         public int UserId { get; set; }
-
-        public User User { get; set; }
-
-        [JsonProperty("loanDate")]
-        public DateTime LoanDate { get; set; }
-
-        [JsonProperty("returnDate")]
-        public DateTime? ReturnDate { get; set;}
-
-        [JsonProperty("returned")]
+        public User User { get; set; }       
+        public DateTime LoanDate { get; set; }        
+        public DateTime? ReturnDate { get; set;}      
         public bool Returned { get; set; }
     }
 }

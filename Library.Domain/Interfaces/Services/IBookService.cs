@@ -1,6 +1,5 @@
-﻿using Library.Domain.DTOs;
-using Library.Domain.DTOs.Book;
-using Library.Domain.Models;
+﻿using Library.Domain.DTOs.Book;
+using Library.Domain.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +9,12 @@ using System.Threading.Tasks;
 namespace Library.Domain.Interfaces.Services {
     public interface IBookService {
 
-        Task<GenericResponse<BookResponseDto>> GetBookById(int id);
-        Task<GenericResponse<List<BookResponseDto>>> GetAllBooks();
+        public Task<IEnumerable<BookResponseDto>> GetAllBooks();
+        public Task<BookResponseDto> GetBookById(int id);
+        public Task<BookResponseDto> AddBook(BookRegisterDto bookRegisterDto);
+        public Task<BookResponseDto> UpdateBook(BookUpdateDto bookUpdateDto, int id);
+        public Task<BookResponseDto> DeleteBook(int id);
+        
 
     }
 }
